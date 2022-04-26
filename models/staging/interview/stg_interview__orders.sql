@@ -1,5 +1,11 @@
 with 
 
+source as (
+
+    select * from {{ source('interview', 'orders') }}
+
+),
+
 base as (
 
     select
@@ -20,8 +26,7 @@ base as (
         shipping_method,
         amount_total_cents
 
-    from 
-        `dbt-public.interview_task.orders`  
+    from source
 
 )
 

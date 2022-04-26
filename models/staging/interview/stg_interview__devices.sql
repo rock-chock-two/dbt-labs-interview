@@ -1,5 +1,11 @@
 with
 
+source as (
+
+    select * from {{ source('interview', 'devices') }}
+
+),
+
 base as (
 
     select
@@ -16,7 +22,7 @@ base as (
             else 'unknown'
         end as device_type
 
-    from `dbt-public.interview_task.devices`
+    from source
 
 )
 

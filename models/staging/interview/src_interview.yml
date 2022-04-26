@@ -1,0 +1,14 @@
+version: 2
+
+
+sources:
+
+  # public dataset for querying: `dbt-public.interview_task.devices`
+  - name: interview 
+    schema: interview_task
+    database: dbt-public
+    tables: 
+      - name: devices
+      - name: addresses
+      - name: orders
+      - name: payments

@@ -1,16 +1,22 @@
 with 
 
+source as (
+
+    select * from {{ source('interview', 'addresses') }}
+
+),
+
 base as (
 
-  select
-    *,
-    case
-      when country_code = 'US' then 'US'
-      when country_code != 'US' then 'International'
-      else null
-    end as country_type
+    select
+        *,
+        case
+            when country_code = 'US' then 'US'
+            when country_code != 'US' then 'International'
+            else 'unknown'
+        end as country_type
 
-  from `dbt-public.interview_task.addresses`
+    from source
 
 )
 
