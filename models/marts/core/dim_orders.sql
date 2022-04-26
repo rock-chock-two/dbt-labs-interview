@@ -81,12 +81,4 @@ joined_orders as (
 
 select * from joined_orders
 
-/*
-select * from joined_orders  
-where order_status = 'completed' and 
-    (order_total_amount_cents != paid_total_amount_plus_discount_cents
-    and paid_total_amount_plus_discount_cents > 0)
-
-*/
-
 
