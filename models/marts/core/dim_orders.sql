@@ -70,7 +70,7 @@ final as (
 
         round(stg_interview__orders.order_total_amount_cents / 100, 2) as order_total_amount,
 
-        -- Use jinja to loop through the list of amounts from payments__grouped model to convert cents to dollars 
+        -- Use jinja to convert cents to dollars via looping through the anount fields from payments__grouped model
 
         {%- for amount in amounts %}
 
