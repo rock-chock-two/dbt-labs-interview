@@ -1,11 +1,19 @@
 # Query review
 
-## Logical/calculation comments
+
+## Helpful resources
+To get started with dbt, I'd recommend reading the following resources and try following the described best practices:
+1. https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md
+2. https://discourse.getdbt.com/t/how-we-structure-our-dbt-projects/355
+2. https://docs.getdbt.com/docs/guides/best-practices
+
+
+## Comments on query logic/calculations 
 
 1. devices
 
 1.1
-There are no records that have `android-app` device, I only found records with device = `android`.
+There are no records that have `android-app` device, instead I found records with device = `android`.
 
 Suggestion:
 ```
@@ -16,9 +24,11 @@ WHEN d.device IN (
 ```
 to
 ```
-when device in ('ios-app', 'android') then 'mobile-app'
+when device in (
+  'ios-app', 
+  'android'
+) then 'mobile-app'
 ```
-
 
 1.2
 Do we really need both 'unknown' and 'ERROR' variants?
@@ -196,7 +206,7 @@ left join orders
     on addresses.customer_id = orders.customer_id
 ```
 
-No need in using table alias before column names when there is no join.
+No need to use table aliases before column names when there is no join.
 
 e.g.
 ``` select devices.id from devices
@@ -306,6 +316,9 @@ to read.
 CTEs help the code to be like lego, it's much easier to combine independent
 parts of the huge query and test them, and yo don't have to memorize all the details
 once you've checked that the data is valid.
+
+Read more about CTEs:
+https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091
 
 3. Documents and tests
 

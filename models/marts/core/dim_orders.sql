@@ -1,3 +1,13 @@
+{% set amounts = [
+    "paid_amount",
+    "paid_tax_amount",
+    "paid_shipping_amount",
+    "discount_amount",
+    "paid_total_amount",
+    "paid_total_amount_plus_discount"
+    ] 
+%}
+
 with 
 
 stg_interview__orders as (
@@ -30,7 +40,7 @@ payments__grouped as (
 
 ),
 
-joined_orders as (
+final as (
 
     select
         stg_interview__orders.order_id,
@@ -58,15 +68,20 @@ joined_orders as (
         payments__grouped.payments,
         payments__grouped.completed_payments,
 
-        stg_interview__orders.order_total_amount_cents,
-        payments__grouped.paid_amount_cents,
-        payments__grouped.paid_tax_amount_cents,
-        payments__grouped.paid_shipping_amount_cents,
-        payments__grouped.discount_amount_cents,
-        payments__grouped.paid_total_amount_cents, 
-        payments__grouped.paid_total_amount_plus_discount_cents
-        
+        round(stg_interview__orders.order_total_amount_cents / 100, 2) as order_total_amount,
 
+        -- Use jinja to loop through the list of amounts from payments__grouped model to convert cents to dollars 
+
+        {%- for amount in amounts %}
+
+            round(
+                payments__grouped.{{amount}}_cents / 100,
+                2
+            ) as {{amount}}
+
+            {%- if not loop.last %},{% endif -%}
+        {%- endfor %}
+        
     from stg_interview__orders
     left join devices__filtered
         on stg_interview__orders.order_id = devices__filtered.order_id
@@ -79,6 +94,6 @@ joined_orders as (
 
 )
 
-select * from joined_orders
+select * from final
 
 

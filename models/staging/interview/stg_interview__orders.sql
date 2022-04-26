@@ -30,4 +30,4 @@ base as (
 
 )
 
-select * from base
+select * from base 
