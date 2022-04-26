@@ -1,0 +1,173 @@
+version: 2
+
+models:
+  - name: stg_interview__devices
+    description: ""
+    columns:
+      - name: device
+        description: ""
+        tests: 
+          - not_null
+
+      - name: created_at
+        description: ""
+
+      - name: updated_at
+        description: ""
+
+      - name: type
+        description: ""
+
+      - name: type_id
+        description: "type_id is a foreign key of specified type. E.g. if type = 'order', then type_id is order_id. type_id is null for devices.type='cart'"
+
+      - name: device_type
+        description: ""
+        tests:
+          - accepted_values:
+              values: ['desktop', 'mobile-app', 'mobile-web', 'unknown']
+
+  - name: stg_interview__addresses
+    description: "User's order addresses"
+    columns:
+      - name: order_id
+        description: ""
+        tests: 
+          - unique
+          - not_null
+
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+
+      - name: name
+        description: ""
+
+      - name: address
+        description: ""
+
+      - name: state
+        description: ""
+
+      - name: country_code
+        description: ""
+        tests:
+          - not_null
+
+      - name: country_type
+        description: "US, Intenational, or null"
+
+
+  - name: stg_interview__orders
+    description: ""
+    columns:
+      - name: order_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+
+      - name: created_at
+        description: ""
+        tests:
+          - not_null
+
+      - name: updated_at
+        description: ""
+        tests:
+          - not_null
+
+      - name: shipped_at
+        description: ""
+
+      - name: currency
+        description: ""
+        tests:
+          - not_null
+
+      - name: order_status
+        description: ""
+        tests:
+          - accepted_values:
+              values: ['paid', 'shipped', 'completed', 'pending', 'cancelled']
+
+      - name: order_status_category
+        description: ""
+        tests:
+          - accepted_values:
+              values: ['paid', 'pending', 'cancelled']
+
+      - name: shipping_method
+        description: ""
+
+      - name: order_total_amount_cents
+        description: ""
+        tests:
+          - not_null
+
+
+models:
+  - name: stg_interview__payments
+    description: ""
+    columns:
+      - name: payment_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        description: ""
+        tests:
+          - not_null
+
+      - name: created_at
+        description: ""
+        tests:
+          - not_null
+
+      - name: payment_status
+        description: ""
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['paid', 'shipped', 'completed', 'pending', 'cancelled']
+  
+      - name: payment_status_category
+        description: ""
+        tests:
+          - accepted_values:
+              values: ['paid', 'pending', 'cancelled']
+
+      - name: tax_amount_cents
+        description: ""
+        tests:
+          - not_null
+
+      - name: amount_cents
+        description: ""
+        tests:
+          - not_null
+
+      - name: shipping_amount_cents
+        description: ""
+        tests:
+          - not_null
+
+      - name: discount_amount_cents
+        description: "Coupon amount is a discount applied to order"
+        tests:
+          - not_null
+
+      - name: payment_type
+        description: ""
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['cash', 'other', 'coupon', 'paypal', 'credit_card']
