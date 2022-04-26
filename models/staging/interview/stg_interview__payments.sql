@@ -2,7 +2,11 @@ with
 
 base as (
 
-    select * from `dbt-public.interview_task.payments`
+    select 
+        *,
+        status as payment_status 
+    
+    from `dbt-public.interview_task.payments`
 
 )
 
