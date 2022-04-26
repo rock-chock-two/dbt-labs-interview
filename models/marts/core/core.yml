@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_orders
-    description: '{{ doc("order_amount_scenarios") }}'
+    description: '{{ doc("dim_orders") }}'
 
     columns:
       - name: order_id
