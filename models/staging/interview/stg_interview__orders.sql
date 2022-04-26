@@ -19,12 +19,12 @@ base as (
 
         if(
             status in ('paid', 'completed','shipped'),
-            'completed',
+            'paid',
             status
         ) as order_status_category,
         
         shipping_method,
-        amount_total_cents
+        round(amount_total_cents, 2) as order_total_amount_cents
 
     from source
 

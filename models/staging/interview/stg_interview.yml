@@ -19,7 +19,7 @@ models:
         description: ""
 
       - name: type_id
-        description: "type_id is a foreign key of specified type. E.g. if type = 'order' and type_id =''. type_id is null for devices.type='cart'"
+        description: "type_id is a foreign key of specified type. E.g. if type = 'order', then type_id is order_id. type_id is null for devices.type='cart'"
 
       - name: device_type
         description: ""
@@ -101,12 +101,12 @@ models:
         description: ""
         tests:
           - accepted_values:
-              values: ['completed', 'pending', 'cancelled']
+              values: ['paid', 'pending', 'cancelled']
 
       - name: shipping_method
         description: ""
 
-      - name: amount_total_cents
+      - name: order_total_amount_cents
         description: ""
         tests:
           - not_null
@@ -138,17 +138,32 @@ models:
           - not_null
           - accepted_values:
               values: ['paid', 'shipped', 'completed', 'pending', 'cancelled']
+  
+      - name: payment_status_category
+        description: ""
+        tests:
+          - accepted_values:
+              values: ['paid', 'pending', 'cancelled']
 
       - name: tax_amount_cents
         description: ""
+        tests:
+          - not_null
 
       - name: amount_cents
         description: ""
         tests:
           - not_null
 
-      - name: amount_shipping_cents
+      - name: shipping_amount_cents
         description: ""
+        tests:
+          - not_null
+
+      - name: discount_amount_cents
+        description: "Coupon amount is a discount applied to order"
+        tests:
+          - not_null
 
       - name: payment_type
         description: ""

@@ -34,5 +34,11 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   dbt_labs_interview:
     # Applies to all files under models/example/
-    example:
-      materialized: view
+    marts:
+      core:
+        +materialized: table
+        intermediate:
+          +materialized: ephemeral
+
+    staging:
+      +materialized: view

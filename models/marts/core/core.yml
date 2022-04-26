@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: dim_orders
+    description: '{{ doc("order_amount_scenarios") }}'
+
+    columns:
+      - name: order_id
+        description: ""
+        tests:
+            - unique
+            - not_null
