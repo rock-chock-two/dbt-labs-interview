@@ -5,7 +5,7 @@
 To get started with dbt, I'd recommend reading the following resources and try following the described best practices:
 1. https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md
 2. https://discourse.getdbt.com/t/how-we-structure-our-dbt-projects/355
-2. https://docs.getdbt.com/docs/guides/best-practices
+3. https://docs.getdbt.com/docs/guides/best-practices
 
 
 ## Comments on query logic/calculations 
