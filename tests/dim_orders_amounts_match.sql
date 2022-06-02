@@ -2,6 +2,7 @@ with
 
 base as (
 
+    -- test comment
     select * from {{ ref('dim_orders') }}
 
 )
