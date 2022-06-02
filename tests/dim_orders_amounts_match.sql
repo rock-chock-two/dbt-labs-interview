@@ -7,7 +7,7 @@ base as (
 )
 
 select 
-    *
+    *   
 
 from base  
 where order_status = 'completed' and 
